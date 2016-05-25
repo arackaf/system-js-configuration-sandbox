@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="application/javascript" src="assets/system.js"></script>
+
+    <script type="text/javascript">
+        var config = ({
+            packages: {
+                '/': {
+                    defaultExtension: 'js',
+                    map: { },
+                    meta: { 'vendor/util1.js': { format: 'global' } }
+                }
+            }
+        });
+
+        System.config(config);
+
+        System.import('./contacts/contacts').then(obj => checkit(() => obj.name == 'contacts', 'contacts loaded'));
+        System.import('./tasks/tasks').then(obj => {
+            checkit(() => obj.name == 'tasks', 'tasks loaded');
+        });
+
+        function checkit(expr, message){
+            try {
+                let result = expr();
+                console.log(result ? 'PASS' : 'FAIL', message);
+            } catch (err){
+                console.log('FAIL', err, message);
+            }
+
+        }
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
