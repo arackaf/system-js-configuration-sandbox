@@ -1,4 +1,4 @@
-var config = ({
+var config = {
     packages: {
         //but it works with /v0
         '/': {
@@ -10,7 +10,7 @@ var config = ({
         }
     },
     baseURL: '/v0'
-});
+};
 
 window.require = System.amdRequire;
 window.define = System.amdDefine;
