@@ -1,17 +1,19 @@
 var config = {
     packages: {
-        //but it works with /v0
         '': {
-            defaultExtension: 'js',
-            meta: {
-                'vendor/util1.global.js': { format: 'global' }
-            }
+            defaultExtension: 'js'
         }
     },
     baseURL: '/v0/',
     map: {
-        text: 'assets/text'
+        text: 'assets/text',
+        global2: 'vendor/global2',
+        global3: 'vendor/global3'
     },
+    meta: {
+        'vendor/global2.js': { deps: ['global3'] },
+        'vendor/util1.global.js': { format: 'global' }
+    }
 };
 
 window.require = System.amdRequire;
@@ -34,6 +36,14 @@ Promise.all([
     System.import('contacts/contacts'),
     System.import('contacts/contacts.htm!text')
 ]).then(([obj]) => checkit(() => obj.name == 'contacts', 'contacts loaded'));
+
+System.import('global2').then(() => {
+    if (window.global3Loaded){
+        console.log('PASS - global 3 loaded imlicitly')
+    } else {
+        console.log('FAIL - global 3 not loaded')
+    }
+});
 
 //This works - contactsWithHtml correctly pulls down text.js from it's specified location
 //System.import('contacts/contactsWithHtml').then(obj => checkit(() => obj.name == 'contacts', 'contacts loaded'));
