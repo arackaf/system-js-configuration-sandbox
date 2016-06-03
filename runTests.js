@@ -1,18 +1,20 @@
 var config = {
     packages: {
         '': {
-            defaultExtension: 'js'
+            defaultExtension: 'js',
+            map: {
+                global2: 'vendor/global2',
+                global3: 'vendor/global3'
+            },
+            meta: {
+                'vendor/global2.js': { deps: ['global3'] },
+                'vendor/util1.global.js': { format: 'global' }
+            }
         }
     },
     baseURL: '/v0/',
     map: {
-        text: 'assets/text',
-        global2: 'vendor/global2',
-        global3: 'vendor/global3'
-    },
-    meta: {
-        'vendor/global2.js': { deps: ['global3'] },
-        'vendor/util1.global.js': { format: 'global' }
+        text: 'assets/text'
     }
 };
 
