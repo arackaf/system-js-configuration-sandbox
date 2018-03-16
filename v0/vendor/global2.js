@@ -1,1 +1,0 @@
-module.exports = { name: 'global2' };
